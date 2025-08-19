@@ -156,6 +156,4 @@ This project is licensed under the "Do Epic Shit" License - see the stars align 
 *We don't care if you're making robots, or producing dope beats.*  
 **Pursue your passions. Change the world. Be an Outlier.**
 
----
-
-**🤖 Crafted with [Claude Code](https://claude.ai/code)**
+##Test
