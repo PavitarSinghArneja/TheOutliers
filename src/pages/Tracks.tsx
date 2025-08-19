@@ -45,17 +45,17 @@ export function Tracks({ onBack, onHome }: TracksProps) {
       id: 1, 
       title: "code red", 
       src: "tracks/red.jpeg",
-      heading: "genetic engineering game",
+      heading: "genetic espionage and bio-security",
       description: "discover the power of genes to shape the future",
-      detail: "from web apps to mobile solutions, your code is your weapon. no rules, just pure creation. <span className=\"text-white font-medium\">make it happen.</span>"
+      detail: "step into the shadowy world of genetic espionage, where DNA is both the weapon and the code to crack. from designer pathogens to bio-surveillance, students must decode threats and defend the future of humanity—one gene at a time."
     },
     { 
       id: 2, 
       title: "catalyst", 
       src: "tracks/blue.jpeg",
-      heading: "biotech x AI x healthcare innovation challenge",
+      heading: "designing health for a world on edge",
       description: "from idea to impact—design the future of preventive health",
-      detail: "whether it's research, social impact, or breakthrough ideas, you're the one who starts the chain reaction. <span className=\"text-white font-medium\">ignite the future.</span>"
+      detail: "in a world racing to prevent the next crisis, students will prototype bold biotech and ai-driven solutions that keep people healthy before they fall sick. from gene-based diagnostics to predictive wearables, they’ll turn cutting-edge science into startup ideas that reimagine public health from the ground up."
     },
     { 
       id: 3, 
@@ -63,23 +63,22 @@ export function Tracks({ onBack, onHome }: TracksProps) {
       src: "tracks/yellow.jpeg",
       heading: "MUN-style simulation",
       description: "who controls the crisis—the people, or the profits?",
-      detail: "from biotech breakthroughs to mental health solutions, your ideas can save lives and change everything. <span className=\"text-white font-medium\">be the cure.</span>"
+      detail: "from ultra-processed foods to addictive additives, delegates navigate a world where public health policy is quietly shaped by industry influence. students will debate regulations, confront lobbying, and rethink the balance between national welfare and global market power."
     },
     { 
       id: 4, 
       title: "grey matter", 
       src: "tracks/green.jpeg",
-      heading: "bioethics debate",
-      description: "biotech x AI x healthcare innovation challenge",
-      detail: "neuroscience, AI, cognitive enhancement – your brain is the ultimate frontier. explore the impossible. <span className=\"text-white font-medium\">expand minds.</span>"
-    }
-  ];
+      heading: "ethics in a post-pandemic world",
+      description: "the ethics of mandatory genomic surveillance in a post-pandemic world",
+      detail: "in the aftermath of a global pandemic, the world turns to biotech to prevent the next one—but at what cost? students will debate sweeping policies like mandatory DNA screening, grappling with the ethical trade-offs between collective safety and personal freedom."
+}];
 
   // Default content when no track is hovered
   const defaultContent = {
-    heading: "work on ideas<br />that excite you.",
+    heading: "choose the track that excites you.",
     description: "maybe you wanna build an app.",
-    detail: "no idea is too big, or too small. we don't care if you're making robots, or producing dope beats. <span className=\"text-white font-medium\">pursue your passions.</span>"
+    detail: "no idea is too big, or too small. we don't care if you're growing organs in the dish, or engineering glow in the dark bananas. <span className=\"text-white font-medium\">pursue your passions.</span>"
   };
 
   // Get current content based on hovered track

@@ -138,7 +138,7 @@ export function Registration({ onBack, onSuccess, onLoginRedirect, onHome }: Reg
       };
 
       try {
-        const response = await fetch('https://pzon8n.app.n8n.cloud/webhook/a5bc2a96-fb8b-4dde-b7a0-d562b93fbd7d', {
+        const response = await fetch('https://tavs.app.n8n.cloud/webhook/a5bc2a96-fb8b-4dde-b7a0-d562b93fbd7d', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
