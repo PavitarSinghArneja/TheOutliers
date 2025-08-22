@@ -9,6 +9,7 @@ interface TracksProps {
 export function Tracks({ onBack, onHome }: TracksProps) {
   const [showImages, setShowImages] = useState(false);
   const [hoveredTrack, setHoveredTrack] = useState<number | null>(null);
+  const [isLargeScreen, setIsLargeScreen] = useState(false);
 
   useEffect(() => {
     // Start the animation after component mounts
@@ -16,7 +17,18 @@ export function Tracks({ onBack, onHome }: TracksProps) {
       setShowImages(true);
     }, 500);
 
-    return () => clearTimeout(timer);
+    // Check screen size
+    const checkScreenSize = () => {
+      setIsLargeScreen(window.innerWidth >= 1024);
+    };
+
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', checkScreenSize);
+    };
   }, []);
 
   // Animation variants for dropping images
@@ -87,22 +99,143 @@ export function Tracks({ onBack, onHome }: TracksProps) {
     : defaultContent;
 
   return (
-    <div className="min-h-screen bg-black flex relative">
+    <div className="h-screen bg-black flex flex-col lg:flex-row relative overflow-hidden">
       {/* Logo in top left */}
-      <div className="absolute top-6 left-6 z-10">
+      <div className="absolute top-4 left-4 md:top-6 md:left-6 z-20">
         <button onClick={onHome} className="cursor-pointer">
-          <img src="/assets/imagetrans.png" alt="Logo" className="w-12 h-13" />
+          <img src="/assets/imagetrans.png" alt="Logo" className="w-10 h-11 md:w-12 md:h-13" />
         </button>
       </div>
-      {/* Left side - 4 track images */}
-      <div className="flex-1 flex">
+      
+      {/* Mobile: Text content at top - always shows default text */}
+      <div className="lg:hidden bg-black px-4 py-4 pt-20 flex-1 flex items-center justify-start order-1">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="text-left max-w-lg w-full"
+        >
+          {/* Main heading */}
+          <motion.h2 
+            className="text-xl md:text-2xl font-bold text-white mb-3 leading-tight"
+            dangerouslySetInnerHTML={{ __html: defaultContent.heading }}
+          />
+          
+          {/* Description text */}
+          <motion.p 
+            className="text-gray-300 text-sm md:text-base leading-relaxed mb-3"
+          >
+            {defaultContent.description}
+          </motion.p>
+          
+          {/* Detail text */}
+          <motion.p 
+            className="text-gray-400 text-sm md:text-base leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: defaultContent.detail }}
+          />
+        </motion.div>
+      </div>
+
+      {/* Mobile: Cropped image rows at bottom */}
+      <div className="lg:hidden flex flex-col justify-end order-2 flex-shrink-0 pb-5">
+        {trackImages.map((track, index) => {
+          const isSelected = hoveredTrack === track.id;
+          
+          return (
+            <motion.div
+              key={track.id}
+              custom={index}
+              variants={dropVariants}
+              initial="hidden"
+              animate={showImages ? "visible" : "hidden"}
+              className="relative cursor-pointer transition-all duration-500 ease-in-out overflow-hidden"
+              style={{
+                height: isSelected ? '300px' : '80px'
+              }}
+              onClick={() => setHoveredTrack(isSelected ? null : track.id)}
+            >
+              {/* Text overlay for expanded image - shows above the image */}
+              {isSelected && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 20 }}
+                  transition={{ duration: 0.3, delay: 0.1 }}
+                  className="absolute top-0 left-0 right-0 z-10 bg-black/80 p-4 shadow-lg"
+                  style={{
+                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.3)'
+                  }}
+                >
+                  <div className="max-w-lg">
+                    <h3 
+                      className="text-white text-sm font-bold mb-1 leading-tight drop-shadow-md"
+                      dangerouslySetInnerHTML={{ __html: track.heading }}
+                    />
+                    <p className="text-gray-300 text-xs leading-relaxed mb-1 drop-shadow-sm">
+                      {track.description}
+                    </p>
+                    <p 
+                      className="text-gray-400 text-xs leading-relaxed drop-shadow-sm"
+                      dangerouslySetInnerHTML={{ __html: track.detail }}
+                    />
+                  </div>
+                </motion.div>
+              )}
+              
+              <motion.div
+                className="w-full h-full relative"
+                animate={{
+                  scale: isSelected ? 1.02 : 1,
+                }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+              >
+                <img
+                  src={track.src}
+                  alt={track.title}
+                  className="w-full h-full object-cover"
+                  style={{
+                    objectPosition: 'center center'
+                  }}
+                />
+                
+                {/* Overlay with title for non-selected items */}
+                <motion.div 
+                  className="absolute inset-0 bg-black/30 flex items-center justify-center"
+                  animate={{
+                    opacity: isSelected ? 0 : 1,
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <motion.span 
+                    className="text-white text-base font-bold tracking-wider text-center px-4"
+                  >
+                    {track.title}
+                  </motion.span>
+                </motion.div>
+                
+                {/* Selected overlay */}
+                <motion.div 
+                  className="absolute inset-0 bg-black/20"
+                  animate={{
+                    opacity: isSelected ? 1 : 0,
+                  }}
+                  transition={{ duration: 0.3 }}
+                />
+              </motion.div>
+            </motion.div>
+          );
+        })}
+      </div>
+
+      {/* Desktop: Images in flex row */}
+      <div className="hidden lg:flex flex-1 order-2">
         {trackImages.map((track, index) => {
           const isHovered = hoveredTrack === track.id;
           const isAnyHovered = hoveredTrack !== null;
           
-          // Calculate flex basis - hovered track takes 60%, others share 40%
+          // Calculate flex basis for desktop - hovered track takes 60%, others share 40%
           let flexBasis = '25%'; // Default: each takes 25%
-          if (isAnyHovered) {
+          if (isAnyHovered && isLargeScreen) {
             if (isHovered) {
               flexBasis = '60%'; // Hovered track takes 60%
             } else {
@@ -118,7 +251,9 @@ export function Tracks({ onBack, onHome }: TracksProps) {
               initial="hidden"
               animate={showImages ? "visible" : "hidden"}
               className="relative group cursor-pointer transition-all duration-500 ease-in-out"
-              style={{ flexBasis }}
+              style={{ 
+                flexBasis: isLargeScreen ? flexBasis : 'auto'
+              }}
               onMouseEnter={() => setHoveredTrack(track.id)}
               onMouseLeave={() => setHoveredTrack(null)}
             >
@@ -136,14 +271,14 @@ export function Tracks({ onBack, onHome }: TracksProps) {
                 
                 {/* Overlay on hover */}
                 <motion.div 
-                  className="absolute inset-0 bg-black/30 flex items-center justify-center"
+                  className="absolute inset-0 bg-black/50 flex items-center justify-center"
                   animate={{
                     opacity: isHovered ? 1 : 0,
                   }}
                   transition={{ duration: 0.3 }}
                 >
                   <motion.span 
-                    className="text-white text-2xl font-bold tracking-wider"
+                    className="text-white text-2xl font-bold tracking-wider text-center px-4"
                     animate={{
                       scale: isHovered ? 1 : 0.8,
                       opacity: isHovered ? 1 : 0,
@@ -159,8 +294,8 @@ export function Tracks({ onBack, onHome }: TracksProps) {
         })}
       </div>
 
-      {/* Right side - Text content */}
-      <div className="w-1/2 bg-black flex items-center justify-center px-16">
+      {/* Desktop: Text content on right side */}
+      <div className="hidden lg:flex w-1/2 bg-black items-center justify-center px-8 xl:px-16 order-3">
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -169,7 +304,7 @@ export function Tracks({ onBack, onHome }: TracksProps) {
         >
           {/* Main heading */}
           <motion.h1 
-            className="text-6xl font-bold text-white mb-8 leading-tight"
+            className="text-4xl xl:text-6xl font-bold text-white mb-8 leading-tight"
             key={hoveredTrack || 'default'}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

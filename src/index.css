@@ -55,6 +55,40 @@
   }
   body {
     @apply bg-background text-foreground;
+    /* Better mobile scrolling */
+    -webkit-overflow-scrolling: touch;
+    /* Prevent horizontal overflow */
+    overflow-x: hidden;
+  }
+  
+  /* Improve touch targets on mobile */
+  @media (max-width: 768px) {
+    button, 
+    input, 
+    select, 
+    textarea,
+    a {
+      min-height: 44px; /* iOS recommended minimum touch target */
+    }
+    
+    /* Better button padding on mobile */
+    button {
+      @apply px-4 py-3;
+    }
+  }
+  
+  /* Prevent text selection on interactive elements */
+  button,
+  .cursor-pointer {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Smooth scrolling for better UX */
+  html {
+    scroll-behavior: smooth;
   }
 
   @keyframes meteor {

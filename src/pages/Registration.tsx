@@ -239,7 +239,7 @@ export function Registration({ onBack, onSuccess, onLoginRedirect, onHome }: Reg
   };
 
   return (
-    <div className="relative min-h-screen bg-black flex items-center justify-center px-12 py-8 overflow-y-auto">
+    <div className="relative min-h-screen bg-black flex items-center justify-center px-4 md:px-8 lg:px-12 py-8 overflow-y-auto">
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <Meteors number={30} />
       </div>
@@ -251,33 +251,33 @@ export function Registration({ onBack, onSuccess, onLoginRedirect, onHome }: Reg
           <div className="absolute inset-0" onClick={closeModal} />
           
           {/* Modal Content */}
-          <div className="relative z-10 w-full max-w-md">
+          <div className="relative z-10 w-full max-w-sm md:max-w-md">
             <MagicCard
               gradientColor={theme === "dark" ? "#262626" : "#D9D9D955"}
               className="p-0 border border-white/20"
             >
-              <div className="p-6 text-center">
+              <div className="p-4 md:p-6 text-center">
                 {/* Success Icon */}
-                <div className="mx-auto w-12 h-12 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full flex items-center justify-center mb-4">
-                  <svg className="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="mx-auto w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full flex items-center justify-center mb-4">
+                  <svg className="w-5 h-5 md:w-6 md:h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
                 
                 {/* Title */}
-                <h2 className="text-2xl font-bold mb-4" style={{ color: '#C08CF1' }}>
+                <h2 className="text-xl md:text-2xl font-bold mb-4" style={{ color: '#C08CF1' }}>
                   welcome to The Outliers
                 </h2>
                 
                 {/* Success Message */}
-                <p className="text-gray-300 text-sm mb-6">
+                <p className="text-gray-300 text-sm mb-4 md:mb-6">
                   you're officially part of something different.
                 </p>
                 
                 {/* Password Section */}
-                <div className="bg-gradient-to-r from-gray-800/50 to-gray-700/50 rounded-lg p-4 mb-4 border border-white/10">
-                  <p className="text-gray-300 text-sm mb-2">your permanent password:</p>
-                  <div className="bg-black/50 rounded px-3 py-2 font-mono text-purple-400 text-lg tracking-wider border border-purple-500/30">
+                <div className="bg-gradient-to-r from-gray-800/50 to-gray-700/50 rounded-lg p-3 md:p-4 mb-4 border border-white/10">
+                  <p className="text-gray-300 text-xs md:text-sm mb-2">your permanent password:</p>
+                  <div className="bg-black/50 rounded px-2 md:px-3 py-2 font-mono text-purple-400 text-base md:text-lg tracking-wider border border-purple-500/30 break-all">
                     {webhookResponse.password}
                   </div>
                   <p className="text-gray-400 text-xs mt-2">save this - you'll need it to login</p>
@@ -292,7 +292,7 @@ export function Registration({ onBack, onSuccess, onLoginRedirect, onHome }: Reg
                         onLoginRedirect();
                       }
                     }}
-                    className="px-6 py-2 text-white hover:opacity-90 font-medium text-sm rounded-lg transition-all duration-200"
+                    className="px-4 md:px-6 py-2 text-white hover:opacity-90 font-medium text-sm rounded-lg transition-all duration-200 w-full sm:w-auto"
                     style={{ backgroundColor: '#C08CF1' }}
                   >
                     let's go
@@ -305,30 +305,30 @@ export function Registration({ onBack, onSuccess, onLoginRedirect, onHome }: Reg
       )}
       
       {/* Logo in top left */}
-      <div className="absolute top-6 left-6 z-10">
+      <div className="absolute top-4 left-4 md:top-6 md:left-6 z-10">
         <button onClick={onHome} className="cursor-pointer">
-          <img src="/assets/image2.png" alt="Logo" className="w-12 h-13" />
+          <img src="/assets/image2.png" alt="Logo" className="w-10 h-11 md:w-12 md:h-13" />
         </button>
       </div>
       
       {/* Centered form */}
-      <div className="w-full max-w-4xl mt-16">
+      <div className="w-full max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-4xl mt-16 sm:mt-20">
         <Card className="p-0 shadow-none border-none">
           <MagicCard
             gradientColor={theme === "dark" ? "#262626" : "#D9D9D955"}
             className="p-0"
           >
-            <CardHeader className="border-b border-border p-6">
-              <CardTitle className="text-white">Join The Outliers</CardTitle>
-              <CardDescription className="text-gray-300">
+            <CardHeader className="border-b border-border p-4 md:p-6">
+              <CardTitle className="text-white text-lg md:text-xl">Join The Outliers</CardTitle>
+              <CardDescription className="text-gray-300 text-sm md:text-base">
                 Fill in your details to become part of our community
               </CardDescription>
             </CardHeader>
-            <CardContent className="p-6">
+            <CardContent className="p-4 md:p-6">
               <form onSubmit={handleSubmit}>
                 <div className="grid gap-6">
                   {/* Row 1: Name and Email */}
-                  <div className="grid grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                     <div className="grid gap-2">
                       <Label htmlFor="name" className="text-white">Name *</Label>
                       <Input
@@ -357,7 +357,7 @@ export function Registration({ onBack, onSuccess, onLoginRedirect, onHome }: Reg
                   </div>
                   
                   {/* Row 2: WhatsApp and LinkedIn */}
-                  <div className="grid grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                     <div className="grid gap-2">
                       <Label htmlFor="whatsapp" className="text-white">WhatsApp Number *</Label>
                       <Input
@@ -386,7 +386,7 @@ export function Registration({ onBack, onSuccess, onLoginRedirect, onHome }: Reg
                   </div>
                   
                   {/* Row 3: College and Course */}
-                  <div className="grid grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                     <div className="grid gap-2">
                       <Label htmlFor="college" className="text-white">College *</Label>
                       <Input
@@ -415,7 +415,7 @@ export function Registration({ onBack, onSuccess, onLoginRedirect, onHome }: Reg
                   </div>
                   
                   {/* Row 4: City and Age */}
-                  <div className="grid grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                     <div className="grid gap-2">
                       <Label htmlFor="city" className="text-white">City *</Label>
                       <Input
@@ -445,11 +445,11 @@ export function Registration({ onBack, onSuccess, onLoginRedirect, onHome }: Reg
                 </div>
               </form>
             </CardContent>
-            <CardFooter className="p-6 border-t border-border">
+            <CardFooter className="p-4 md:p-6 border-t border-border">
               <div className="w-full space-y-3">
                 <Button 
                   type="submit" 
-                  className="w-full text-white hover:opacity-90 disabled:opacity-50"
+                  className="w-full text-white hover:opacity-90 disabled:opacity-50 text-sm md:text-base"
                   style={{ backgroundColor: '#C08CF1' }}
                   onClick={handleSubmit}
                   disabled={isSubmitting}
@@ -458,7 +458,7 @@ export function Registration({ onBack, onSuccess, onLoginRedirect, onHome }: Reg
                 </Button>
                 <Button 
                   type="button"
-                  className="w-full text-white hover:opacity-90"
+                  className="w-full text-white hover:opacity-90 text-sm md:text-base"
                   style={{ backgroundColor: '#C08CF1' }}
                   onClick={onLoginRedirect}
                 >

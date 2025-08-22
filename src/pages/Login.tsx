@@ -156,7 +156,7 @@ export function Login({ onBack, onSuccess, onHome }: LoginProps) {
   };
 
   return (
-    <div className="relative min-h-screen bg-black flex items-center justify-center px-12">
+    <div className="relative min-h-screen bg-black flex items-center justify-center px-4 md:px-8 lg:px-12">
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <Meteors number={30} />
       </div>
@@ -171,29 +171,29 @@ export function Login({ onBack, onSuccess, onHome }: LoginProps) {
           />
           
           {/* Modal Content */}
-          <div className="relative z-10 w-full max-w-md">
+          <div className="relative z-10 w-full max-w-sm md:max-w-md">
             <MagicCard
               gradientColor={theme === "dark" ? "#262626" : "#D9D9D955"}
               className="p-0 transform transition-all duration-500 ease-out scale-100 opacity-100"
             >
-              <div className="p-8 text-center">
+              <div className="p-4 md:p-8 text-center">
                 {/* Success Icon */}
-                <div className="mx-auto w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mb-6">
-                  <svg className="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="mx-auto w-12 h-12 md:w-16 md:h-16 bg-green-500/20 rounded-full flex items-center justify-center mb-4 md:mb-6">
+                  <svg className="w-6 h-6 md:w-8 md:h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
                 
                 {/* Title */}
-                <h2 className="text-2xl font-bold text-white mb-4">
+                <h2 className="text-xl md:text-2xl font-bold text-white mb-4">
                   Login Successful!
                 </h2>
                 
                 {/* Webhook Response Section */}
-                <div className="bg-gray-800/50 rounded-lg p-4 mb-6">
-                  <p className="text-gray-300 text-sm mb-2">Server Response:</p>
-                  <div className="bg-gray-900/50 rounded px-3 py-2 text-left">
-                    <pre className="text-xs text-gray-300 whitespace-pre-wrap overflow-x-auto">
+                <div className="bg-gray-800/50 rounded-lg p-3 md:p-4 mb-4 md:mb-6">
+                  <p className="text-gray-300 text-xs md:text-sm mb-2">Server Response:</p>
+                  <div className="bg-gray-900/50 rounded px-2 md:px-3 py-2 text-left">
+                    <pre className="text-xs text-gray-300 whitespace-pre-wrap overflow-x-auto break-all">
                       {typeof webhookResponse.data === 'string' 
                         ? webhookResponse.data 
                         : JSON.stringify(webhookResponse.data, null, 2)
@@ -205,7 +205,7 @@ export function Login({ onBack, onSuccess, onHome }: LoginProps) {
                 {/* Close Button */}
                 <Button 
                   onClick={closeModal}
-                  className="w-full text-white hover:opacity-90"
+                  className="w-full text-white hover:opacity-90 text-sm md:text-base"
                   style={{ backgroundColor: '#C08CF1' }}
                 >
                   Continue
@@ -217,26 +217,26 @@ export function Login({ onBack, onSuccess, onHome }: LoginProps) {
       )}
       
       {/* Logo in top left */}
-      <div className="absolute top-6 left-6 z-10">
+      <div className="absolute top-4 left-4 md:top-6 md:left-6 z-10">
         <button onClick={onHome} className="cursor-pointer">
-          <img src="/assets/image2.png" alt="Logo" className="w-12 h-13" />
+          <img src="/assets/image2.png" alt="Logo" className="w-10 h-11 md:w-12 md:h-13" />
         </button>
       </div>
       
       {/* Centered form */}
-      <div className="w-full max-w-sm">
+      <div className="w-full max-w-xs sm:max-w-sm">
         <Card className="p-0 shadow-none border-none">
           <MagicCard
             gradientColor={theme === "dark" ? "#262626" : "#D9D9D955"}
             className="p-0"
           >
-            <CardHeader className="border-b border-border p-6">
-              <CardTitle className="text-white">Login</CardTitle>
-              <CardDescription className="text-gray-300">
+            <CardHeader className="border-b border-border p-4 md:p-6">
+              <CardTitle className="text-white text-lg md:text-xl">Login</CardTitle>
+              <CardDescription className="text-gray-300 text-sm md:text-base">
                 Enter your credentials to access your account
               </CardDescription>
             </CardHeader>
-            <CardContent className="p-6">
+            <CardContent className="p-4 md:p-6">
               <form onSubmit={handleSubmit}>
                 <div className="grid gap-4">
                   <div className="grid gap-2">
@@ -267,10 +267,10 @@ export function Login({ onBack, onSuccess, onHome }: LoginProps) {
                 </div>
               </form>
             </CardContent>
-            <CardFooter className="p-6 border-t border-border">
+            <CardFooter className="p-4 md:p-6 border-t border-border">
               <Button 
                 type="submit" 
-                className="w-full text-white hover:opacity-90 disabled:opacity-50"
+                className="w-full text-white hover:opacity-90 disabled:opacity-50 text-sm md:text-base"
                 style={{ backgroundColor: '#C08CF1' }}
                 onClick={handleSubmit}
                 disabled={isSubmitting}
